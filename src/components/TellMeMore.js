@@ -28,11 +28,11 @@ export default class TellMeMore extends Component {
         <React.Fragment>
             <br />
             {!isOpen ? (
-                <a onClick={this.open}>Quieres contarnos mas?</a>
+                <a onClick={this.open}>¿Quieres contarnos mas?</a>
             ) : (
                 <div style={{width: '400px', justifyContent: 'center'}}>
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <h4>Que sucedio?</h4>
+                        <h4>¿Qué sucedio?</h4>
                         <a onClick={this.close}>Cerrar</a>
                     </div>
                     <TextArea onChangeCapture={this.handleChange} />
