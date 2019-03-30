@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Divider} from 'antd';
 
 import './App.css';
-import {LandingMessage, BasicForm, Header, Help} from './components'
+import {LandingMessage, BasicForm, Header, Help, Perfil} from './components'
 const firebase = require("firebase");
 // Required for side-effects
 require("firebase/firestore");
@@ -55,16 +55,24 @@ class App extends Component {
     this.setState({centers})
   }
 
+  setRoute = (route) => {
+    console.log(route);
+    this.setState({route})
+  }
+
   render() {
     const {centers, route} = this.state; 
     return (
       <div className='App'>
         {centers ? (
           <React.Fragment>
-            <Header centers={centers} />
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', marginTop: '5%'}}>
+            <Header setRoute={this.setRoute} centers={centers} />
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap', marginTop: '2%'}}>
             {route === 'help' && (
               <Help centers={centers}/>
+            )}
+            {route === 'perfil' && (
+              <Perfil firebase={firebase} db={db} />
             )}
           </div>
           </React.Fragment>  

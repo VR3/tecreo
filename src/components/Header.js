@@ -4,11 +4,13 @@ import { Menu, Icon } from 'antd';
 
 export default class Header extends React.Component {
   state = {
-    current: 'ayuda',
+    current: 'help',
   }
 
   handleClick = (e) => {
+    const {setRoute} = this.props;
     console.log('click ', e);
+    setRoute(e.key);
     this.setState({
       current: e.key,
     });
@@ -21,11 +23,11 @@ export default class Header extends React.Component {
         selectedKeys={[this.state.current]}
         mode="horizontal"
       >
-        <Menu.Item key="ayuda">
+        <Menu.Item key="help">
           <Icon type="question" />Encontrar ayuda
         </Menu.Item>
         <Menu.Item key="perfil">
-          <Icon type="profile" />Mi Perfil
+          <Icon type="profile" />Mi Expediente
         </Menu.Item>
       </Menu>
     );

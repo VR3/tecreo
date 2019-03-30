@@ -4,6 +4,8 @@ import TellMeMore from './TellMeMore';
 import Header from './Header';
 import Footer from './Footer';
 import Help from './Help';
+import Perfil from './Perfil';
+import FormInfo from './FormInfo';
 
 export {
     BasicForm,
@@ -12,4 +14,6 @@ export {
     Header,
     Footer,
     Help,
+    Perfil,
+    FormInfo,
 }

@@ -95,16 +95,17 @@ export default class BasicForm extends Component {
         const {what, who, where, how} = this.state;
         const {db, firebase, setCenters} = this.props;
         // Save the complain
-        /* db.collection("complaints").add({
+        db.collection("complaints").add({
             userRef: db.doc('users/' + firebase.auth().currentUser.uid),
-            what, who, where, how
+            incident: {what, who, where, how}, 
+            information: null,
         })
         .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
-        }); */
+        });
         // Get the data
         db.collection('centros').where("style", "==", what)
         .get()
