@@ -20,9 +20,9 @@ export default class Perfil extends Component {
                 <TabPane tab="Mi información" key="1">
                     <FormInfo firebase={firebase} db={db}/>
                 </TabPane>
-                <TabPane tab="Denuncia" key="2">Denuncia</TabPane>
-                <TabPane tab="Agresor" key="3">Agresor</TabPane>
-                <TabPane tab="Atención Médica" key="4">Atención Médica</TabPane>
+                <TabPane disabled tab="Denuncia" key="2">Denuncia</TabPane>
+                <TabPane disabled tab="Agresor" key="3">Agresor</TabPane>
+                <TabPane disabled tab="Atención Médica" key="4">Atención Médica</TabPane>
             </Tabs>
         </div>
         )

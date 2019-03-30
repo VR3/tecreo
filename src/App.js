@@ -47,7 +47,7 @@ class App extends Component {
 
   state = {
     centers: null,
-    route: 'help',
+    route: 'perfil',
   }
 
   setCenters = (centers) => {

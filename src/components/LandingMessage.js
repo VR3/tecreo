@@ -18,8 +18,8 @@ export default class LandingMessage extends Component {
         <Typography>No estas sola, encuentra ayuda <b>Médica, Psicológica, Júridica</b> profesional.</Typography>
         {/* <img style={{marginTop: '35px', height:"150px", border: '1px', borderColor:'#F0F0F0', borderRadius: '10px'}} src={require('../assets/maps.png')}/> */}
         <div syle={{display: 'flex', flexDirection: 'row'}}>
-          <img style={{marginTop: '5px', height:"150px", marginTop: '60px', border: '1px', borderColor:'#F0F0F0', borderRadius: '10px'}} src={require('../assets/imm.jpg')}/>
-          <img style={{marginTop: '5px', height:"150px", marginTop: '60px', marginLeft: '15px', border: '1px', borderColor:'#F0F0F0', borderRadius: '10px', backgroundColor: 'white'}} src={require('../assets/juarez.png')}/>
+          <a target="blank" href="https://www.facebook.com/MujerJuarense/"><img style={{marginTop: '5px', height:"150px", marginTop: '60px', border: '1px', borderColor:'#F0F0F0', borderRadius: '10px'}} src={require('../assets/imm.jpg')}/></a>
+          <a target="blank" href="http://www.juarez.gob.mx/"><img style={{marginTop: '5px', height:"150px", marginTop: '60px', marginLeft: '15px', border: '1px', borderColor:'#F0F0F0', borderRadius: '10px', backgroundColor: 'white'}} src={require('../assets/juarez.png')}/></a>
         </div>
       </div>
     )

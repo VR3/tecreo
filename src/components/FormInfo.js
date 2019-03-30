@@ -1,11 +1,21 @@
 import React, { Component } from 'react'
-import {
-    Card, Form, Input, Icon, DatePicker, Checkbox, Button, TimePicker, Select, Cascader, InputNumber,
-  } from 'antd';
-  
+import { Card, Form, Input, Icon, DatePicker, Checkbox, Button, TimePicker, Select, Cascader, InputNumber, notification} from 'antd';
+import jsPDF from 'jspdf';
+
+const openNotificationWithIcon = (type) => {
+  notification[type]({
+    message: 'Guardado',
+    description: 'Tu información ha sido guardada éxitosamente.',
+  });
+};
+
   const { Option } = Select;
 
 class FormInfo extends Component {
+
+    state = {
+        pdfAvailable: false,
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -37,13 +47,45 @@ class FormInfo extends Component {
         .doc(currentDocs[0])
         .update({information: values})
         .then(() => {
+            this.setState({pdfAvailable: true})
+            openNotificationWithIcon('success');
             console.log('Success')
         });
+    }
 
+    renderPDF = async () => {
+        var lMargin=15; //left margin in mm
+        var rMargin=15; //right margin in mm
+        var pdfInMM=210;  // width of A4 in mm
+        const { firebase, db } = this.props;
+        const doc = new jsPDF();
+        doc.setFontSize(14);
+
+        const currentDocs = [];
+
+        const categoryDocRef = 
+        await db.collection('users')
+        .doc(firebase.auth().currentUser.uid);
+
+        await db.collection("complaints")
+        .where("userRef", "==", categoryDocRef)
+        .get()
+        .then(querySnapshot => {
+            console.log(querySnapshot);
+            querySnapshot.forEach(doc => currentDocs.push(doc.data()));
+        });
+
+        let pdfText='';
+        currentDocs.map(currentDoc => pdfText = pdfText +`\n{\n\tIncidente: ${JSON.stringify(currentDoc.incident)}\n\tInformación: ${(JSON.stringify(currentDoc.information))}\n},`)
+
+        var lines =doc.splitTextToSize(pdfText, (pdfInMM-lMargin-rMargin));
+	    doc.text(lMargin,20,lines);
+        doc.save(`${firebase.auth().currentUser.uid}.pdf`)
     }
 
     render() {
         const { getFieldDecorator } = this.props.form;
+        const {pdfAvailable} = this.state;
         return (
         <div>
             <Card>
@@ -128,6 +170,12 @@ class FormInfo extends Component {
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Guardar
                         </Button>
+                        {pdfAvailable && (
+                            <Button type="default" style={{float: 'right'}} onClick={this.renderPDF}>
+                                Descargar PDF
+                            </Button>
+                        )}
+                        
                     </Form.Item>
                 </Form>
             </Card>
